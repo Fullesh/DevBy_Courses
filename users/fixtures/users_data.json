@@ -1,0 +1,71 @@
+[
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$mEyAkFpLfxxaLNiEYLVUPQ$nlvjMMF90OdTlkudutLDpEl0ZdraAsqUSMkqiORObmQ=",
+    "last_login": "2024-05-28T08:08:32Z",
+    "is_superuser": true,
+    "username": "Admin",
+    "first_name": "admin",
+    "last_name": "service",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-05-28T08:08:24Z",
+    "email": "admin@service.py",
+    "phone": "1",
+    "avatar": "",
+    "country": "Россия",
+    "is_verified": true,
+    "token": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 2,
+  "fields": {
+    "password": "31102011",
+    "last_login": "2024-05-28T08:09:51Z",
+    "is_superuser": true,
+    "username": "TestUser_1",
+    "first_name": "Danila",
+    "last_name": "Belov",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-05-28T08:09:43Z",
+    "email": "danilabelov.adm@yandex.ru",
+    "phone": null,
+    "avatar": "",
+    "country": "Россия",
+    "is_verified": true,
+    "token": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 3,
+  "fields": {
+    "password": "31102011",
+    "last_login": "2024-05-28T08:10:40Z",
+    "is_superuser": true,
+    "username": "TestUser_2",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-05-28T08:10:36Z",
+    "email": "bigbob_2@yandex.ru",
+    "phone": null,
+    "avatar": "",
+    "country": "Россия",
+    "is_verified": false,
+    "token": null,
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
