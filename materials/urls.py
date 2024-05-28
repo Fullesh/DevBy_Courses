@@ -5,11 +5,13 @@ from rest_framework.routers import DefaultRouter
 
 from materials.views import CourseViewSet, LessionListAPIView, LessionCreateAPIView, LessionRetieveAPIView, \
     LessionUpdateAPIView, LessionDestroyAPIView
+from users.views import PaymentViewSet
 
 app_name = MaterialsConfig.name
 
 router = DefaultRouter()
 router.register('course', CourseViewSet, basename='course')
+router.register('payment', PaymentViewSet, basename='payment')
 
 urlpatterns = [
     path('lessions/', LessionListAPIView.as_view(), name='lession_view'),
