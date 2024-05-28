@@ -10,7 +10,7 @@ from users.views import PaymentViewSet
 app_name = MaterialsConfig.name
 
 router = DefaultRouter()
-router.register('course', CourseViewSet, basename='course')
+router.register(r'course', CourseViewSet, basename='course')
 router.register('payment', PaymentViewSet, basename='payment')
 
 urlpatterns = [
