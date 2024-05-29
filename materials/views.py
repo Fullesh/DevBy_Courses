@@ -49,20 +49,20 @@ class LessionCreateAPIView(generics.CreateAPIView):
 class LessionListAPIView(generics.ListAPIView):
     serializer_class = LessionSerializer
     queryset = Lession.objects.all()
-    permission_classes = [IsAuthenticated | IsOwner]
+    permission_classes = [IsAuthenticated | IsOwner | IsAdminUser]
     pagination_class = LessionPaginator
 
 
 class LessionRetieveAPIView(generics.RetrieveAPIView):
     serializer_class = LessionSerializer
     queryset = Lession.objects.all()
-    permission_classes = [IsAuthenticated, IsOwner]
+    permission_classes = [IsAuthenticated | IsOwner | IsAdminUser]
 
 
 class LessionUpdateAPIView(generics.UpdateAPIView):
     serializer_class = LessionSerializer
     queryset = Lession.objects.all()
-    permission_classes = [IsAuthenticated, IsModerator | IsOwner]
+    permission_classes = [IsAuthenticated | IsModerator | IsOwner | IsAdminUser]
 
 
 class LessionDestroyAPIView(generics.DestroyAPIView):
