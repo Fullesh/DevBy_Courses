@@ -9,7 +9,7 @@ class URLValidator:
         self.url = url
 
     def __call__(self, value):
-        reg = re.compile('^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$')
+        reg = re.compile(r'^(https?://)?(www\.)?(youtube\.com|youtu\.be)/.+$',)
         tmp_url = dict(value).get(self.url)
         if not bool(reg.match(tmp_url)):
             print(False)
