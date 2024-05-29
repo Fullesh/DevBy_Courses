@@ -9,7 +9,11 @@ class URLValidator:
         self.url = url
 
     def __call__(self, value):
-        reg = re.compile('https://youtube.com')
+        reg = re.compile('^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$')
         tmp_url = dict(value).get(self.url)
         if not bool(reg.match(tmp_url)):
+            print(False)
+            print(tmp_url)
             raise serializers.ValidationError('Данная ссылка не является ссылкой на Youtube')
+        else:
+            print(True)
