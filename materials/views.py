@@ -75,10 +75,9 @@ class SubscriptionAPIView(APIView):
 
     def post(self, *args, **kwargs):
         user = self.request.user
-        print(self.request.data)
         course_id = self.request.data.get('course')
         course = get_object_or_404(Course, pk=course_id)
-        subs_item = Subscription.objects.all().filter(user=user).filter(course=course).first()
+        subs_item = Subscription.objects.all().filter(user=user).filter(course=course)
 
         if subs_item.exists():
             subs_item.delete()
