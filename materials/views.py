@@ -38,7 +38,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 class LessionCreateAPIView(generics.CreateAPIView):
     serializer_class = LessionSerializer
-    permission_classes = [IsAuthenticated | IsAdminUser | IsOwner]
+    permission_classes = [IsAuthenticated | IsAdminUser]
 
     def perform_create(self, serializer):
         new_lession = serializer.save()
@@ -75,8 +75,8 @@ class SubscriptionAPIView(APIView):
 
     def post(self, *args, **kwargs):
         user = self.request.user
+        print(self.request.data)
         course_id = self.request.data.get('course')
-        print(self.request.data.get('id'))
         course = get_object_or_404(Course, pk=course_id)
         subs_item = Subscription.objects.all().filter(user=user).filter(course=course).first()
 
