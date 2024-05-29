@@ -36,6 +36,7 @@ class Lession(models.Model):
     class Meta:
         verbose_name = 'Урок'
         verbose_name_plural = 'Уроки'
+        ordering = ['-title', ]
 
 
 class Subscription(models.Model):
