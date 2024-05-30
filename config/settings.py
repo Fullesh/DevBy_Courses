@@ -154,3 +154,5 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     "https://read-and-write.example.com",
 ]
+
+STRIPE_API_KEY = 'sk_test_51PM69tDJE1fhmwJUYeB3j8Ep2j8Uj3yTnQ9G59CpPYNXVWkfPCgtZrKmiFqZypfg8j9zaDEZBJBTiyVRS4EUao8a007NE7DnkY'
