@@ -1,10 +1,15 @@
+from datetime import datetime
+
+import pytz
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, filters, generics
 from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.views import TokenObtainPairView
 
+from config import settings
 from users.models import Payment, User
-from users.serializers import PaymentSerializer, CreateUserSerializer, UserSerializer
+from users.serializers import PaymentSerializer, CreateUserSerializer, UserSerializer, MyTokenObtainPairSerializer
 from users.services import create_stripe_product, create_stripe_price, create_stripe_session
 
 
@@ -70,3 +75,14 @@ class PaymentsCreateAPIView(generics.CreateAPIView):
         payments.session_id = session_id
         payments.link = payment_link
         payments.save()
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
+    def perform_authentication(self, request):
+        user = User.objects.filter(verification_code=self.request.token).first()
+        if user:
+            zone = pytz.timezone(settings.TIME_ZONE)
+            user.last_login = datetime.now(zone)
+            user.save()
