@@ -199,3 +199,11 @@ EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
+
+
+CELERY_BEAT_SCHEDULE = {
+    'task-name': {
+        'task': 'users.tasks.check_last_login',  # Путь к задаче
+        'schedule': timedelta(weeks=4),  # Расписание выполнения задачи (например, каждые 10 минут)
+    },
+}
