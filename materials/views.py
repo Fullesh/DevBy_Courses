@@ -24,8 +24,8 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     def perform_update(self, serializer):
         course = serializer.save()
-        print(self.request.user)
-        send_email_update.delay(course.pk, self.request.user)
+        print(self.request.user.pk)
+        send_email_update.delay(course.pk, self.request.user.pk, self.request.user.email)
 
     def get_permissions(self):
         if self.action == 'create':
