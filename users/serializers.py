@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from users.models import Payment, User
 
@@ -32,3 +33,14 @@ class CreateUserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # ƒобавление пользовательских полей в токен
+
+        token['email'] = user.email
+
+        return token
