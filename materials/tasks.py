@@ -8,10 +8,10 @@ from materials.models import Course
 
 
 @shared_task
-def send_email_update(pk, user):
+def send_email_update(pk, user_id, user_email):
     instance = Course.objects.get(pk=pk)
-    subscribe = instance.subscription.set.all().filter(user=user)
-    email_list = [user.email for subscribe.user in subscribe]
+    subscribe = instance.subscription_set.all().filter(user=user_id)
+    email_list = [user_email for subscribe.user in subscribe]
     message_subject = f'Обновление курса {instance}'
     message_text = f'Курс {instance} обновлён. Добавили много нового'
     try:
