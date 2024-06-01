@@ -12,7 +12,7 @@ class LessionSerializer(serializers.ModelSerializer):
 
 
 class CourseSerializer(serializers.ModelSerializer):
-    lession = LessionSerializer(source='lession_set', many=True)
+    lession = LessionSerializer(source='lession_set', many=True, read_only=True)
     lessions_quantity = serializers.SerializerMethodField()
     subscription = serializers.SerializerMethodField()
 
@@ -28,7 +28,6 @@ class CourseSerializer(serializers.ModelSerializer):
         if instance.lession_set.all():
             return instance.lession_set.count()
         return 0
-
 
     def create(self, validated_data):
         lession = validated_data.pop('lession_set')
