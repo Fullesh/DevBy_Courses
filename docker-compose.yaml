@@ -3,10 +3,12 @@ version: "3"
 services:
   db:
     image: postgres
+    env_file:
+      .env
     enviroment:
-      POSTGRES_PASSWORD: 1
-      POSTGRES_HOST: db
-      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: DATABASE_PASSWORD
+      POSTGRES_HOST: DATABASE_HOST
+      POSTGRES_DB: DATABASE_NAME
       PG_DATA: /var/lib/postgresql/data/pgdata
 
   app:
