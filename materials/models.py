@@ -29,6 +29,8 @@ class Lession(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Курс', **NULLABLE)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE,
                               verbose_name='Владелец урока')
+    last_login = models.DateTimeField(verbose_name='Дата успешного входа', **NULLABLE)
+    is_active = models.BooleanField(default=True, verbose_name='Активен')
 
     def __str__(self):
         return f'{self.title} {self.URL} {self.course}'

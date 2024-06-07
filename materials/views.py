@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
@@ -8,6 +9,7 @@ from materials.models import Course, Lession, Subscription
 from materials.paginators import LessionPaginator, CoursePaginator
 from materials.permissions import IsModerator, IsOwner
 from materials.serializers import CourseSerializer, LessionSerializer, SubscriptionSerializer
+from materials.tasks import send_email_update
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -19,6 +21,11 @@ class CourseViewSet(viewsets.ModelViewSet):
         new_course = serializer.save()
         new_course.owner = self.request.user
         new_course.save()
+
+    def perform_update(self, serializer):
+        course = serializer.save()
+        print(self.request.user.pk)
+        send_email_update.delay(course.pk, self.request.user.pk, self.request.user.email)
 
     def get_permissions(self):
         if self.action == 'create':
@@ -73,6 +80,7 @@ class LessionDestroyAPIView(generics.DestroyAPIView):
 class SubscriptionAPIView(APIView):
     serializer_class = SubscriptionSerializer
 
+    @swagger_auto_schema(request_body=SubscriptionSerializer)
     def post(self, *args, **kwargs):
         user = self.request.user
         course_id = self.request.data.get('course')
