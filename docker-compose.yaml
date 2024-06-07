@@ -28,13 +28,13 @@ services:
     build: .
     env_file:
       - .env
-    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     ports:
       - '8000:8000'
       - '5432:5432'
     depends_on:
       db:
-        - condition: service_healthy
+        condition: service_healthy
 
   celery:
     build: .
@@ -43,7 +43,6 @@ services:
     command: celery -A config worker -l INFO
     restart: on-failure
     depends_on:
-      redis:
         - redis
         - app
         - db
@@ -55,7 +54,6 @@ services:
     command: celery -A config beat -l INFO
     restart: on-failure
     depends_on:
-      redis:
         - redis
         - app
         - db
