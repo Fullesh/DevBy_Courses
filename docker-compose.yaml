@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    enviroment:
+      POSTGRES_PASSWORD: 1
+      POSTGRES_HOST: db
+      POSTGRES_DB: postgres
+      PG_DATA: /var/lib/postgresql/data/pgdata
+
+  app:
+    build: .
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000
+    ports:
+      - '8000:8000'
+      - '5432:5432'
+    depends_on:
+      - db
