@@ -89,10 +89,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME'),
-        'USER': os.getenv('DATABASE_USER'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'HOST': os.getenv('DATABASE_HOST'),
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 1,
+        'HOST': 'db',
         'PORT': '5432'
     }
 }
@@ -173,19 +173,19 @@ if CACHE_ENABLED:
         }
     }
 
-# URL-адрес брокера сообщений
-CELERY_BROKER_URL = os.getenv('CACHES_LOCATION')  # Например, Redis, который по умолчанию работает на порту 6379
+# URL-Г Г¤Г°ГҐГ± ГЎГ°Г®ГЄГҐГ°Г  Г±Г®Г®ГЎГ№ГҐГ­ГЁГ©
+CELERY_BROKER_URL = os.getenv('CACHES_LOCATION')  # ГЌГ ГЇГ°ГЁГ¬ГҐГ°, Redis, ГЄГ®ГІГ®Г°Г»Г© ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ Г°Г ГЎГ®ГІГ ГҐГІ Г­Г  ГЇГ®Г°ГІГі 6379
 
-# URL-адрес брокера результатов, также Redis
+# URL-Г Г¤Г°ГҐГ± ГЎГ°Г®ГЄГҐГ°Г  Г°ГҐГ§ГіГ«ГјГІГ ГІГ®Гў, ГІГ ГЄГ¦ГҐ Redis
 CELERY_RESULT_BACKEND = os.getenv('CACHES_LOCATION')
 
-# Часовой пояс для работы Celery
+# Г—Г Г±Г®ГўГ®Г© ГЇГ®ГїГ± Г¤Г«Гї Г°Г ГЎГ®ГІГ» Celery
 CELERY_TIMEZONE = "Australia/Tasmania"
 
-# Флаг отслеживания выполнения задач
+# Г”Г«Г ГЈ Г®ГІГ±Г«ГҐГ¦ГЁГўГ Г­ГЁГї ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГї Г§Г Г¤Г Г·
 CELERY_TASK_TRACK_STARTED = True
 
-# Максимальное время на выполнение задачи
+# ГЊГ ГЄГ±ГЁГ¬Г Г«ГјГ­Г®ГҐ ГўГ°ГҐГ¬Гї Г­Г  ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГҐ Г§Г Г¤Г Г·ГЁ
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -204,7 +204,7 @@ EMAIL_ADMIN = EMAIL_HOST_USER
 
 CELERY_BEAT_SCHEDULE = {
     'task-name': {
-        'task': 'users.tasks.check_last_login',  # Путь к задаче
-        'schedule': timedelta(weeks=4),  # Расписание выполнения задачи (например, каждые 10 минут)
+        'task': 'users.tasks.check_last_login',  # ГЏГіГІГј ГЄ Г§Г Г¤Г Г·ГҐ
+        'schedule': timedelta(weeks=4),  # ГђГ Г±ГЇГЁГ±Г Г­ГЁГҐ ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГї Г§Г Г¤Г Г·ГЁ (Г­Г ГЇГ°ГЁГ¬ГҐГ°, ГЄГ Г¦Г¤Г»ГҐ 10 Г¬ГЁГ­ГіГІ)
     },
 }
