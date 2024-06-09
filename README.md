@@ -10,13 +10,24 @@
 
 2. **Переименуйте пример файла окружения с .env_example в .env и отредактируйте его**
 
-3. **Постройте и запустите контейнеры Docker**
+    *Дополнительно* \
+    *Если вы используете redis в качестве брокера celery, то в файле .env* \
+    *В поле CACHES_LOCATION замените localhost(127.0.0.1) на redis*
+
+
+4. **Постройте и запустите контейнеры Docker**
     ```
     docker-compose build
     docker-compose up
     ```
 
-5. **Создание суперпользователя**
+5. **Выполните миграции**
+
+   ```
+   docker-compose exec app python manage.py migrate
+   '''
+
+6. **Создание суперпользователя**
     ```
     docker-compose exec app python manage.py csu
     ```
