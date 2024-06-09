@@ -25,7 +25,7 @@
 
    ```
    docker-compose exec app python manage.py migrate
-   '''
+   ```
 
 6. **Создание суперпользователя**
     ```
